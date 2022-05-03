@@ -55,5 +55,4 @@ else {
 Repair-WindowsImage -Online -Scanhealth 
 #Get-AppxPackage *Microsoft.Windows.SecHealthUI* | Reset-AppxPackage
 #Get-AppxPackage Microsoft.SecHealthUI -AllUsers | Reset-AppxPackage
-Get-AppXPackage -ErrorAction SilentlyContinue -AllUsers | Foreach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"}
-
+Get-AppXPackage -AllUsers | Foreach {Add-AppxPackage -DisableDevelopmentMode -Register -ErrorAction SilentlyContinue "$($_.InstallLocation)\AppXManifest.xml"} 
