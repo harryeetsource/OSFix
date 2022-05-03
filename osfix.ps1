@@ -40,7 +40,7 @@ else {
 }
 if (Test-Path -Path $folder3) {Write-Host "Sysinternals directory already exists, removing old version"
     Remove-Item -Path $folder3 -Recurse
-     New-Item -Path "$env:appdata\" -Name "autoruns" -ItemType "directory"
+    New-Item -Path "$env:appdata\" -Name "autoruns" -ItemType "directory"
     Invoke-WebRequest $url3 -Outfile "$folder3\autoruns.zip"
     Expand-Archive -LiteralPath "$folder3\autoruns.zip" -DestinationPath "$folder3\autoruns\"
     Start-Process "$folder3\autoruns\autoruns64.exe"
@@ -52,7 +52,7 @@ else {
     Expand-Archive -LiteralPath "$env:appdata\autoruns\autoruns.zip" -DestinationPath "$env:appdata\autoruns\autoruns\"
     Start-Process "$env:appdata\autoruns\autoruns\autoruns64.exe"
 }
-Repair-WindowsImage -Online -Scanhealth 
+Repair-WindowsImage -Online -Scanhealth -StartComponentCleanup -ResetBase
 #Get-AppxPackage *Microsoft.Windows.SecHealthUI* | Reset-AppxPackage
 #Get-AppxPackage Microsoft.SecHealthUI -AllUsers | Reset-AppxPackage
 Get-AppXPackage -AllUsers | Foreach {Add-AppxPackage -DisableDevelopmentMode -Register -ErrorAction SilentlyContinue "$($_.InstallLocation)\AppXManifest.xml"} 
