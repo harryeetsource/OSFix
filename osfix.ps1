@@ -1,4 +1,5 @@
-﻿$url1 = "https://go.microsoft.com/fwlink/?LinkId=212732"
+﻿
+$url1 = "https://go.microsoft.com/fwlink/?LinkId=212732"
 $folder1 = "$env:appdata\msert"
 $url2 = "https://go.microsoft.com/fwlink/?LinkID=799445"
 $folder2 = "$env:appdata\WUA"
@@ -52,7 +53,7 @@ else {
     Expand-Archive -LiteralPath "$env:appdata\autoruns\autoruns.zip" -DestinationPath "$env:appdata\autoruns\autoruns\"
     Start-Process "$env:appdata\autoruns\autoruns\autoruns64.exe"
 }
-Repair-WindowsImage -Online -Scanhealth -StartComponentCleanup -ResetBase
 #Get-AppxPackage *Microsoft.Windows.SecHealthUI* | Reset-AppxPackage
 #Get-AppxPackage Microsoft.SecHealthUI -AllUsers | Reset-AppxPackage
 Get-AppXPackage -AllUsers | Foreach {Add-AppxPackage -DisableDevelopmentMode -Register -ErrorAction SilentlyContinue "$($_.InstallLocation)\AppXManifest.xml"} 
+Repair-WindowsImage -Online -Scanhealth -StartComponentCleanup -ResetBase
