@@ -1,7 +1,7 @@
 $folder1 = "$env:ProgramFiles\Powershell"
 $url1 = "https://github.com/PowerShell/PowerShell/releases/download/v7.2.3/PowerShell-7.2.3-win-x64.msi"
 $folder2 = "$env:ProgramFiles\clamav"
-$url2 = ""
+$url2 = "https://www.clamav.net/downloads/production/clamav-0.105.0.win.x64.zip"
 function Test-Admin {
     $currentUser = New-Object Security.Principal.WindowsPrincipal $([Security.Principal.WindowsIdentity]::GetCurrent())
     $currentUser.IsInRole([Security.Principal.WindowsBuiltinRole]::Administrator)
