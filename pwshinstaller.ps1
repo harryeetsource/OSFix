@@ -23,7 +23,7 @@ if (Test-Path -Path $folder2) { Write-Host "clamav directory already exists, ski
 
 else {
 New-Item -Path "$env:ProgramFiles\" -Name "clamav" -ItemType "directory"
-Invoke-WebRequest  $url1 -OutFile "$folder2\clamav\clamav.zip"
+Invoke-WebRequest  $url2 -OutFile "$folder2\clamav\clamav.zip"
 Expand-Archive -LiteralPath "$folder2\clamav\clamav.zip" -DestinationPath "$folder2\"
 
 }
