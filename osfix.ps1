@@ -5,6 +5,8 @@ $url2 = "https://go.microsoft.com/fwlink/?LinkID=799445"
 $folder2 = "$env:appdata\WUA"
 $url3 = "https://download.sysinternals.com/files/Autoruns.zip"
 $folder3 = "$env:appdata\autoruns"
+$url4 = "https://download.sysinternals.com/files/ProcessExplorer.zip"
+$folder4 = "$env:appdata\procexp"
 function Test-Admin {
     $currentUser = New-Object Security.Principal.WindowsPrincipal $([Security.Principal.WindowsIdentity]::GetCurrent())
     $currentUser.IsInRole([Security.Principal.WindowsBuiltinRole]::Administrator)
@@ -52,6 +54,20 @@ else {
     Invoke-WebRequest $url3 -Outfile "$env:appdata\autoruns\autoruns.zip"
     Expand-Archive -LiteralPath "$env:appdata\autoruns\autoruns.zip" -DestinationPath "$env:appdata\autoruns\autoruns\"
     Start-Process "$env:appdata\autoruns\autoruns\autoruns64.exe"
+}
+if (Test-Path -Path $folder4) {Write-Host "procexp directory already exists, removing old version"
+    Remove-Item -Path $folder3 -Recurse
+    New-Item -Path "$env:appdata\" -Name "procexp" -ItemType "directory"
+    Invoke-WebRequest $url4 -Outfile "$folder4\procexp.zip"
+    Expand-Archive -LiteralPath "$folder4\procexp.zip" -DestinationPath "$folder4\procexp\"
+    Start-Process "$folder4\procexp\procexp64.exe"
+}
+
+else {
+     New-Item -Path "$env:appdata\" -Name "procexp" -ItemType "directory"
+    Invoke-WebRequest $url4 -Outfile "$folder4\procexp.zip"
+    Expand-Archive -LiteralPath "$folder4\procexp.zip" -DestinationPath "$folder4\procexp\"
+    Start-Process "$folder4\procexp\procexp64.exe"
 }
 #Get-AppxPackage *Microsoft.Windows.SecHealthUI* | Reset-AppxPackage
 #Get-AppxPackage Microsoft.SecHealthUI -AllUsers | Reset-AppxPackage
